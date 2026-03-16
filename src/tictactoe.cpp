@@ -8,7 +8,7 @@ Game::Game(Player* p1, Player* p2)
 
 {
     player1 = p1;
-
+                    //Store reference to players
     player2 = p2;
 
     winFlag = false;
@@ -17,12 +17,12 @@ Game::Game(Player* p1, Player* p2)
 void Game::start()
 
 {
-    Player* turn = player1;
+    Player* turn = player1;  //Start with the first player
 
     int moves = 0;
 
-    while (!winFlag && moves < 9)
-
+    while (!winFlag && moves < 9) //If there is no a winner, shows board again
+                                  // Player turn and check if someone is the winner
     {
         board.display();
 
@@ -30,7 +30,7 @@ void Game::start()
 
         winFlag = checkWin();
 
-        if (winFlag)
+        if (winFlag)   //One of the players won
 
         {
             board.display();
@@ -59,7 +59,7 @@ void Game::takeTurn(Player* currentPlayer)
 
     std::string input;
 
-    while (true)
+    while (true)         //Loop until player makes a valid move
 
     {
         std::cout << currentPlayer->getName() << " turn ("

@@ -1,14 +1,15 @@
 #include "Board.h"
+
 #include <iostream>
 
-Board::Board() : squares{1,2,3,4,5,6,7,8,9}
+Board::Board() : squares{1,2,3,4,5,6,7,8,9}  //Constructor for board design
 {
 }
 
 void Board::display() const
 {
     std::cout << "\n";
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 9; i++)  //Loop, display X and O in squares
     {
         if (squares[i] == -1)
             std::cout << " X ";
