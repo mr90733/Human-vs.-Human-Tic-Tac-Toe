@@ -31,6 +31,8 @@ int main()
 
             std::cin >> playAgain;
 
+            std::cin.ignore();
+
             if (playAgain == "yes" || playAgain == "no")
 
                 break;

@@ -1,10 +1,27 @@
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/benchmark/catch_benchmark.hpp>
-#include <catch2/benchmark/catch_constructor.hpp>
-#include <catch2/generators/catch_generators_range.hpp>
 
 #include "../src/tictactoe.hpp"
 
-TEST_CASE( "it works" ) {
-    REQUIRE( true );
+#include "../src/Player.h"
+
+TEST_CASE("Game creation")
+
+{
+    Player p1("Player X", -1);
+
+    Player p2("Player O", 0);
+
+    REQUIRE_NOTHROW(Game(&p1, &p2));
+}
+
+TEST_CASE("checkWin False on empty board")
+
+{
+    Player p1("Player X", -1);
+
+    Player p2("Player O", 0);
+
+    Game game(&p1, &p2);
+
+    REQUIRE(game.checkWin() == false);
 }
