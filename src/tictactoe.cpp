@@ -4,33 +4,87 @@
 
 #include <sstream>
 
-Game::Game(Player* p1, Player* p2)
+Game::Game(Player* p1, Player* p2, bool vsComp, bool compFirst)
 
 {
     player1 = p1;
-                    //Store reference to players
+
     player2 = p2;
 
     winFlag = false;
+
+    SComputer = vsComp;
+
+    FComputer = compFirst;
+}
+
+void Game::computerTurn(const Player* computer)
+
+{
+    for (int i = 0; i < 9; i++)
+
+    {
+        if (board.isEmpty(i))
+
+        {
+            board.setSquare(i, computer->getSymbol());
+
+            std::cout << "Computer chose: " << (i + 1) << "\n";
+
+            break;
+        }
+    }
 }
 
 void Game::start()
 
 {
-    Player* turn = player1;  //Start with the first player
+    Player* turn = player1;
+
+    if (SComputer && FComputer)
+
+        turn = player1;
 
     int moves = 0;
 
-    while (!winFlag && moves < 9) //If there is no a winner, shows board again
-                                  // Player turn and check if someone is the winner
+    while (!winFlag && moves < 9)
+
     {
         board.display();
 
-        takeTurn(turn);
+        if (SComputer && turn == player2 && FComputer == false)
+
+        {
+            computerTurn(player2);
+        }
+
+        else if (SComputer && turn == player1 && FComputer == true)
+
+        {
+            computerTurn(player1);
+        }
+
+        else if (SComputer && turn == player1 && FComputer == false)
+
+        {
+            takeTurn(player1);
+        }
+
+        else if (SComputer && turn == player2 && FComputer == true)
+
+        {
+            takeTurn(player2);
+        }
+
+        else
+
+        {
+            takeTurn(turn);
+        }
 
         winFlag = checkWin();
 
-        if (winFlag)   //One of the players won
+        if (winFlag)
 
         {
             board.display();
@@ -52,14 +106,15 @@ void Game::start()
         std::cout << "No Winner, tie!\n";
 }
 
-void Game::takeTurn(Player* currentPlayer)
+
+void Game::takeTurn(const Player* currentPlayer)
 
 {
     int choice;
 
     std::string input;
 
-    while (true)         //Loop until player makes a valid move
+    while (true)
 
     {
         std::cout << currentPlayer->getName() << " turn ("

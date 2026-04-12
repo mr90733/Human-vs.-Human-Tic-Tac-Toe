@@ -16,7 +16,7 @@ public:
 
     Player(const std::string& n, int s);
 
-    int getSymbol() const;
+    [[nodiscard]] int getSymbol() const;
 
-    std::string getName() const;
+    [[nodiscard]] std::string getName() const;
 };
