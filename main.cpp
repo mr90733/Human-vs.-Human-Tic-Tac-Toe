@@ -33,7 +33,7 @@ int main()
         {
             std::cin >> choice;
 
-            std::cin.ignore();
+            std::cin.ignore(1000, '\n');
 
             if (choice == 1 || choice == 2 || choice == 3)
 
@@ -77,7 +77,7 @@ int main()
 
             std::cin >> playAgain;
 
-            std::cin.ignore();
+            std::cin.ignore(1000, '\n');
 
             if (playAgain == "yes" || playAgain == "no")
 

@@ -127,7 +127,7 @@ void Game::takeTurn(const Player* currentPlayer)
 
         std::stringstream ss(input);
 
-        if (!(ss >> choice) || !(ss.eof()) || choice < 1 || choice > 9)
+        if (!(ss >> choice) || choice < 1 || choice > 9)
 
         {
             std::cout << "Invalid move. Try again!\n";

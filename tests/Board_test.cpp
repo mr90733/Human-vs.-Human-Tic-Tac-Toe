@@ -2,19 +2,17 @@
 
 #include "../src/Board.h"
 
-TEST_CASE("Board Start")
+TEST_CASE("Board start")
 
 {
+    Board board;
+
     for (int i = 0; i < 9; i++)
 
-        {
-
-        Board board;
-
+    {
         REQUIRE(board.isEmpty(i));
     }
 }
-
 
 TEST_CASE("setSquare update")
 
@@ -24,4 +22,16 @@ TEST_CASE("setSquare update")
     board.setSquare(0, -1);
 
     REQUIRE(board.isEmpty(0) == false);
+}
+
+TEST_CASE("Prevents detecting empty as win scenario")
+
+{
+    Board board;
+
+    for (int i = 0; i < 9; i++)
+
+    {
+        REQUIRE(board.isEmpty(i));
+    }
 }

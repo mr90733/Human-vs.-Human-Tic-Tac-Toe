@@ -17,3 +17,4 @@ TEST_CASE("Player getters")
 
     REQUIRE(p2.getSymbol() == 0);
 }
+
