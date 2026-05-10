@@ -40,7 +40,9 @@ TEST_CASE("Computer move")
 
     Game game(&p1, &p2, true, false);
 
-    REQUIRE_NOTHROW(game.computerTurn(&p2));
+    game.computerTurn(&p2);
+
+    REQUIRE(game.getBoard().getSquareRef(0) == 0);
 }
 
 TEST_CASE("Multiple computer moves")
@@ -52,9 +54,13 @@ TEST_CASE("Multiple computer moves")
 
     Game game(&p1, &p2, true, false);
 
-    REQUIRE_NOTHROW(game.computerTurn(&p2));
+    game.computerTurn(&p2);
 
-    REQUIRE_NOTHROW(game.computerTurn(&p1));
+    game.computerTurn(&p1);
+
+    REQUIRE(game.getBoard().getSquareRef(0) == 0);
+
+    REQUIRE(game.getBoard().getSquareRef(1) == -1);
 }
 
 TEST_CASE("Diagonal win")

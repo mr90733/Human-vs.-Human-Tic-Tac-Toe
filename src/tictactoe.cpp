@@ -16,6 +16,26 @@ Game::Game(Player* p1, Player* p2, bool vsComp, bool compFirst)
     SComputer = vsComp;
 
     FComputer = compFirst;
+
+    trapEnabled = false;
+}
+
+Board& Game::getBoard()
+
+{
+    return board;
+}
+
+void Game::enableTrap(bool enable)
+
+{
+    trapEnabled = enable;
+
+    if (trapEnabled)
+
+    {
+        trap.enable();
+    }
 }
 
 void Game::computerTurn(const Player* computer)
@@ -27,11 +47,19 @@ void Game::computerTurn(const Player* computer)
         if (board.isEmpty(i))
 
         {
+            if (trap.checkHit(i))
+
+            {
+                std::cout << "Computer hit the trap! loses turn!\n";
+
+                return;
+            }
+
             board.setSquare(i, computer->getSymbol());
 
             std::cout << "Computer chose: " << (i + 1) << "\n";
 
-            break;
+            return;
         }
     }
 }
@@ -41,10 +69,6 @@ void Game::start()
 {
     Player* turn = player1;
 
-    if (SComputer && FComputer)
-
-        turn = player1;
-
     int moves = 0;
 
     while (!winFlag && moves < 9)
@@ -52,28 +76,20 @@ void Game::start()
     {
         board.display();
 
-        if (SComputer && turn == player2 && FComputer == false)
+        if (SComputer)
 
         {
-            computerTurn(player2);
-        }
+            if (turn == player1 && FComputer)
 
-        else if (SComputer && turn == player1 && FComputer == true)
+                computerTurn(player1);
 
-        {
-            computerTurn(player1);
-        }
+            else if (turn == player2 && !FComputer)
 
-        else if (SComputer && turn == player1 && FComputer == false)
+                computerTurn(player2);
 
-        {
-            takeTurn(player1);
-        }
+            else
 
-        else if (SComputer && turn == player2 && FComputer == true)
-
-        {
-            takeTurn(player2);
+                takeTurn(turn);
         }
 
         else
@@ -101,33 +117,36 @@ void Game::start()
 
     board.display();
 
-    if (!winFlag)
-
-        std::cout << "No Winner, tie!\n";
+    std::cout << "No Winner, tie!\n";
 }
 
-
 void Game::takeTurn(const Player* currentPlayer)
-
 {
-    int choice;
-
     std::string input;
+
+    int choice;
 
     while (true)
 
     {
-        std::cout << currentPlayer->getName() << " turn ("
-
-                  << (currentPlayer->getSymbol() == 0 ? "O" : "X")
-
-                  << "): ";
+        std::cout << currentPlayer->getName() << " turn: ";
 
         std::getline(std::cin, input);
 
-        std::stringstream ss(input);
+        try
 
-        if (!(ss >> choice) || choice < 1 || choice > 9)
+        {
+            choice = std::stoi(input);
+        }
+
+        catch (...)
+        {
+            std::cout << "Invalid move. Try again!\n";
+
+            continue;
+        }
+
+        if (choice < 1 || choice > 9)
 
         {
             std::cout << "Invalid move. Try again!\n";
@@ -143,6 +162,17 @@ void Game::takeTurn(const Player* currentPlayer)
             std::cout << "Invalid move. Try again!\n";
 
             continue;
+        }
+
+        if (trap.checkHit(index))
+
+        {
+            std::cout << "Oh no! Trap activated!"
+
+                      << currentPlayer->getName()
+
+                      << " loses turn!\n";
+            return;
         }
 
         board.setSquare(index, currentPlayer->getSymbol());

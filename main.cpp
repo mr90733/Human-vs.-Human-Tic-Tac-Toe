@@ -6,6 +6,7 @@
 
 #include <string>
 
+
 int main()
 
 {
@@ -29,17 +30,26 @@ int main()
         std::cout << "What is your selection? ";
 
         while (true)
-
         {
             std::cin >> choice;
 
-            std::cin.ignore(1000, '\n');
+            if (std::cin.fail())
 
-            if (choice == 1 || choice == 2 || choice == 3)
+            {
+                std::cin.clear();
+
+                std::cin.ignore(10000, '\n');
+
+                std::cout << "Invalid input. Choose 1, 2 or 3: ";
+
+                continue;
+            }
+
+            if (choice >= 1 && choice <= 3)
 
                 break;
 
-            std::cout << "Invalid selection! Please choose 1, 2, or 3.\n";
+            std::cout << "Invalid selection! Please choose 1, 2, or 3: ";
         }
 
         Player p1("Player X", -1);
@@ -65,6 +75,50 @@ int main()
         {
             ttt = new Game(&p1, &p2, true, true);
         }
+
+        int trapChoice;
+
+        std::string input;
+
+        std::cin.ignore(10000, '\n');
+
+        std::cout << "\nWould you like to include a trap cell?\n";
+
+        std::cout << "1. Yes\n";
+
+        std::cout << "2. No\n";
+
+        while (true)
+
+        {
+            std::cout << "Selection:";
+
+            std::getline(std::cin, input);
+
+            if (input == "1")
+
+            {
+                trapChoice = 1;
+
+                break;
+            }
+
+            else if (input == "2")
+
+            {
+                trapChoice = 2;
+
+                break;
+            }
+
+            else
+
+            {
+                std::cout << "Invalid selection! Select 1 or 2 only.\n";
+            }
+        }
+
+        ttt->enableTrap(trapChoice == 1);
 
         ttt->start();
 
