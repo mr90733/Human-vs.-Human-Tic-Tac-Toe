@@ -15,12 +15,14 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(main main.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp)
+add_executable(main main.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp src/Trap.cpp)
 
 
 add_executable(Player_test tests/Player_test.cpp src/Player.cpp)
 
-add_executable(Board_test tests/Board_test.cpp src/Board.cpp)
+add_executable(Board_test tests/Board_test.cpp src/Board.cpp
+        src/trap.cpp
+        src/trap.h)
 
 add_executable(tictactoe_test tests/tictactoe_test.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp)
 
