@@ -2,9 +2,11 @@
 
 #include <iostream>
 
-Board::Board() : squares{1,2,3,4,5,6,7,8,9}
-
+Board::Board()
 {
+    for (int & square : squares)
+
+        square = 0;
 }
 
 void Board::display() const
@@ -15,33 +17,34 @@ void Board::display() const
     for (int i = 0; i < 9; i++)
 
     {
-        if (squares[i] == -1)
+        if (squares[i] == 1)
 
             std::cout << " X ";
 
-        else if (squares[i] == 0)
+        else if (squares[i] == 2)
 
             std::cout << " O ";
 
         else
-            std::cout << " " << squares[i] << " ";
+
+            std::cout << " " << (i + 1) << " ";
 
         if ((i + 1) % 3 != 0)
 
             std::cout << "|";
 
-        if ((i + 1) % 3 == 0 && i != 8)
+        if ((i + 1) % 3 == 0)
 
             std::cout << "\n---+---+---\n";
     }
 
-    std::cout << "\n\n";
+    std::cout << "\n";
 }
 
 bool Board::isEmpty(int position) const
 
 {
-    return squares[position] != -1 && squares[position] != 0;
+    return squares[position] == 0;
 }
 
 void Board::setSquare(int position, int value)

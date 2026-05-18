@@ -1,12 +1,10 @@
 #pragma once
 
 class Board
-
 {
-
 private:
 
-    int squares[9];
+    int squares[9]{};
 
 public:
 

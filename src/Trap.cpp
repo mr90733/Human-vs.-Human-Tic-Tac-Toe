@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include <random>
-
 Trap::Trap()
 
 {
@@ -36,8 +34,20 @@ void Trap::disable()
     cell = -1;
 }
 
-bool Trap::checkHit(int index) const
+bool Trap::checkHit(int index)
 
 {
-    return enabled && index == cell;
+    if (!enabled) return false;
+
+    if (index == cell)
+
+    {
+        std::cout << "Trap activated at position " << (index + 1) << "! lose turn\n";
+
+        enabled = false;
+
+        return true;
+    }
+
+    return false;
 }

@@ -7,9 +7,7 @@
 #include "Trap.h"
 
 class Game
-
 {
-
 private:
 
     Player* player1;
@@ -22,13 +20,11 @@ private:
 
     bool winFlag;
 
-    bool SComputer;
+    bool player1Computer;
 
-    bool FComputer;
+    bool player2Computer;
 
     bool trapEnabled;
-
-    int trapCell{};
 
 public:
 
@@ -36,9 +32,9 @@ public:
 
     void start();
 
-    void takeTurn(const Player* currentPlayer);
+    bool takeTurn(const Player* currentPlayer);
 
-    void computerTurn(const Player* computer);
+    bool computerTurn(const Player* computer);
 
     bool checkWin();
 

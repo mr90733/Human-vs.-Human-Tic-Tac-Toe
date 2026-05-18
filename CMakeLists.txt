@@ -21,10 +21,10 @@ add_executable(main main.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp src/
 add_executable(Player_test tests/Player_test.cpp src/Player.cpp)
 
 add_executable(Board_test tests/Board_test.cpp src/Board.cpp
-        src/trap.cpp
-        src/trap.h)
+        src/Trap.cpp
+        src/Trap.h)
 
-add_executable(tictactoe_test tests/tictactoe_test.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp)
+add_executable(tictactoe_test tests/tictactoe_test.cpp src/tictactoe.cpp src/Player.cpp src/Board.cpp src/Trap.cpp src/Trap.h)
 
 
 target_link_libraries(Player_test PRIVATE Catch2::Catch2WithMain)

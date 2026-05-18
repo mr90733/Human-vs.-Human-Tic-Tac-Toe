@@ -52,9 +52,9 @@ int main()
             std::cout << "Invalid selection! Please choose 1, 2, or 3: ";
         }
 
-        Player p1("Player X", -1);
+        Player p1("Player X", 1);
 
-        Player p2("Player O", 0);
+        Player p2("Player O", 2);
 
         Game* ttt;
 
@@ -84,9 +84,9 @@ int main()
 
         std::cout << "\nWould you like to include a trap cell?\n";
 
-        std::cout << "1. Yes\n";
+        std::cout << "Yes (1)\n";
 
-        std::cout << "2. No\n";
+        std::cout << "No (2)\n";
 
         while (true)
 
